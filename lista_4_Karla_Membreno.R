@@ -1,12 +1,12 @@
 ## UNIVERSIDADE FEDERAL DE PERNAMBUCO###
-## DEPARTAMENTO DE CI NCIA POLITICA ###
+## DEPARTAMENTO DE CI√äNCIA POLITICA ###
 ##KARLA JANIXIA MEMBRENO####
-##LISTA No 3#
+##LISTA No 4#
 
-##ExercÌcio 1####
+##Exerc√≠cio 1####
 # link:https://github.com/KarlaMembreno/lista-4-karla-membreno-R #
 
-##ExercÌcio 2####
+##Exerc√≠cio 2####
 
 #Carregando os pacotes#
 
@@ -22,7 +22,7 @@ library(Ggally)
 
 setwd("C:\\Users\\sc\\Desktop\\AD_Lista_4_Karla_Membreno")
 
-#Verificando se est· correto#
+#Verificando se est√° correto#
 
 getwd()
 
@@ -37,7 +37,7 @@ load ("escolas_pe_censo_escolar_2016.RData")
 
 getwd()
 
-#Transformando e conhecendo a base de dados, usando a funÁ„o read_xlsx do pacote readxl para carregar os dados do PNUD#
+#Transformando e conhecendo a base de dados, usando a fun√ß√£o read_xlsx do pacote readxl para carregar os dados do PNUD#
 
 install.packages("readxl")
 
@@ -69,7 +69,7 @@ summarise (n_turmas = n(), turmas_disc_prof = sum(IN_DISC_PROFISSIONALIZANTE, na
             turmas_disc_pt = sum(IN_DISC_LINGUA_PORTUGUESA, na.rm = T),
             turmas_disc_en = sum(IN_DISC_LINGUA_INGLES, na.rm = T))
 
-# verificaÁ„o#
+# verifica√ß√£o#
 
 dim("turmas_pe_sel")[1] == length(unique(turmas_pe$CO_MUNICIPIO))
 summary("turmas_pe_sel")
@@ -87,7 +87,7 @@ escolas_internet = sum(IN_INTERNET, na.rm = T),
 escolas_alimentacao = sum(IN_ALIMENTACAO, na.rm = T))
             
 
-# verificaÁ„o#
+# verifica√ß√£o#
 
 dim(escolas_pe_sel)[1] == length(unique(escolas_pe$CO_MUNICIPIO))
 
@@ -173,7 +173,7 @@ getwd()
 
 load("2016_censo_pnud_pe_sel.RData")
 
-#verificando algumas caracterÌsticas da base de dados:#
+#verificando algumas caracter√≠sticas da base de dados:#
 
 dim(censo_pnud_pe_sel)
 
@@ -182,7 +182,7 @@ summary(censo_pnud_pe_sel)
 head(censo_pnud_pe_sel)
 
 
-## Inciso 2b. N„o deve haver docente com mais de 70 anos ou com menos de 18 anos ####
+## Inciso 2b. N√£o deve haver docente com mais de 70 anos ou com menos de 18 anos ####
 
 summary(censo_pnud_pe_sel)
 
@@ -195,7 +195,7 @@ docentes_pe_selecao <- docentes_pe%>% filter(NU_IDADE => 18, NU_IDADE <= 70)
 dim(docentes_pe_selecao)
 
 
-## Inciso 2c. N„o deve haver aluno com mais de 25 anos ou com menos de 1 ano ####
+## Inciso 2c. N√£o deve haver aluno com mais de 25 anos ou com menos de 1 ano ####
 
 load("matricula_pe_censo_escolar_2016.RData")
 
@@ -205,7 +205,7 @@ dim(matricula_pe_selecao)
 
 summary(matricula_pe_selecao$NU_IDADE)
 
-## Inciso 2d. Apresente estatÌsticas descritivas do n˙mero de alunos por docente nos municÌpios do Estado####
+## Inciso 2d. Apresente estat√≠sticas descritivas do n√∫mero de alunos por docente nos munic√≠pios do Estado####
 
 dim(censo_pnud_pe_sel)
 
@@ -213,7 +213,7 @@ names(censo_pnud_pe_sel)
 
 DocentesAlunos <- censo_pnud_pe_sel$n_matriculas/censo_pnud_pe_sel$n_docentes
 
-#EstatÌstica Descritiva de Docentes por alunos#
+#Estat√≠stica Descritiva de Docentes por alunos#
 
 DocentesAlunos
 
@@ -224,13 +224,13 @@ plot(DocentesAlunos)
 ggplot(censo_pnud_pe_sel, aes(DocentesAlunos))+geom_histogram()
 
 
-## Inciso 2e. Apresente o municÌpio com maior n˙mero de alunos por docente e seu IDHM####
+## Inciso 2e. Apresente o munic√≠pio com maior n√∫mero de alunos por docente e seu IDHM####
 
 names(censo_pnud_pe_sel)
 
 summary(DocentesAlunos)
 
-## juntando vari·veis
+## juntando vari√°veis
 
 censo_pnud_pe_sel_docentesalunos <- censo_pnud_pe_sel %>%  mutate(DocentesAlunos)
 
@@ -238,26 +238,26 @@ View(censo_pnud_pe_sel_docentesalunos)
 
 censo_pnud_pe_sel_docentesalunos["177", ]
 
-# A cidade È Tupanatinga # 
+# A cidade √© Tupanatinga # 
 
 plot(censo_pnud_pe_sel_docentesalunos$DocentesAlunos)
 
 ggplot(censo_pnud_pe_sel_docentesalunos, aes(DocentesAlunos))+geom_histogram()
 
 
-## Inciso 2f.FaÁa o teste do coeficiente de correlaÁ„o linear de pearson e apresente sua resposta ####
+## Inciso 2f.Fa√ßa o teste do coeficiente de correla√ß√£o linear de pearson e apresente sua resposta ####
 
 cor(censo_pnud_pe_sel_docentesalunos$DocentesAlunos, censo_pnud_pe_sel_docentesalunos$IDHM)
 
 cor.test(censo_pnud_pe_sel_docentesalunos$DocentesAlunos, censo_pnud_pe_sel_docentesalunos$IDHM)
 
-#RESPOSTA: Comforme os dados obtidos, a correlaÁ„o È de "-0.5057435"# 
-#ent„o  como È negativa indica que n„o h· correlaÁ„o entre o n˙mero de discentes por aluno e o IDH dos municipios#
+#RESPOSTA: Comforme os dados obtidos, a correla√ß√£o √© de "-0.5057435"# 
+#ent√£o  como √© negativa indica que n√£o h√° correla√ß√£o entre o n√∫mero de discentes por aluno e o IDH dos municipios#
 
 
-## ExercÌcio No. 3 ###
+## Exerc√≠cio No. 3 ###
 
-# gr·fico de R de dispers„o no ggplot#
+# gr√°fico de R de dispers√£o no ggplot#
 
 install.packages(ggplot2)
 library(ggplot2)
